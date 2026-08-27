@@ -25,7 +25,7 @@ mod ipv4 {
             format!("{decimal:08b}")
         }
 
-        fn binary_to_decimal(binary: &str) -> Result<u8, &'static str> {
+        pub fn binary_to_decimal(binary: &str) -> Result<u8, &'static str> {
             if binary.len() != 8 {
                 return Err("binary must contain exactly 8 bits");
             }
@@ -137,7 +137,22 @@ mod tests {
         }        
     }
 
-    
+    mod binary_to_decimal {
+        use super::*;
+
+        #[test]
+        fn it_rejects_binary_with_wrong_length() {
+            assert!(Ipv4::binary_to_decimal("101").is_err());
+            assert!(Ipv4::binary_to_decimal("101011110101").is_err());
+            assert!(Ipv4::binary_to_decimal("").is_err());
+        }
+
+        // #[test]
+        // fn it_rejects_non_binary_characters() {
+        //     assert!(Ipv4::binary_to_decimal("0000000a").is_err());
+        //     assert!(Ipv4::binary_to_decimal("abcdefgh").is_err());
+        // }      
+    }    
 
 
 
