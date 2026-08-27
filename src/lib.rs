@@ -147,11 +147,11 @@ mod tests {
             assert!(Ipv4::binary_to_decimal("").is_err());
         }
 
-        // #[test]
-        // fn it_rejects_non_binary_characters() {
-        //     assert!(Ipv4::binary_to_decimal("0000000a").is_err());
-        //     assert!(Ipv4::binary_to_decimal("abcdefgh").is_err());
-        // }      
+        #[test]
+        fn it_rejects_non_binary_characters() {
+            assert!(Ipv4::binary_to_decimal("0000000a").is_err());
+            assert!(Ipv4::binary_to_decimal("abcdefgh").is_err());
+        }      
     }    
 
 
