@@ -19,6 +19,11 @@ mod ipv4 {
 
             Ok(octets)
         }
+
+        /// Coverts decimal into binary using 8-bit representaion.
+        pub fn decimal_to_binary(decimal: u8) -> String {
+            format!("{decimal:08b}")
+        }        
     }
 }
 
@@ -81,4 +86,34 @@ mod tests {
         }    
     }
 
+    mod decimal_to_binary {
+        use super::*;
+
+        #[test]
+        fn it_always_returns_eight_bits() {
+            // let result = Ipv4::decimal_to_binary(8);
+            // println!("Result: {result}");
+            for decimal in 0..=255 {
+               assert_eq!(Ipv4::decimal_to_binary(decimal).len(), 8);
+            }
+        }
+
+        #[test]
+        fn converts_zero() {
+            assert_eq!(Ipv4::decimal_to_binary(0), "00000000");
+        }
+
+        #[test]
+        fn converts_maximum_u8() {
+            let result = Ipv4::decimal_to_binary(255);
+            // println!("Result: {result}");
+            assert_eq!(result, "11111111");
+        }
+
+        #[test]
+        fn it_converts_values_with_leading_zeroes() {
+            assert_eq!(Ipv4::decimal_to_binary(13), "00001101");
+            assert_eq!(Ipv4::decimal_to_binary(42), "00101010");
+        }        
+    }
 }
