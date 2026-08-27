@@ -23,6 +23,26 @@ mod ipv4 {
         /// Coverts decimal into binary using 8-bit representaion.
         pub fn decimal_to_binary(decimal: u8) -> String {
             format!("{decimal:08b}")
+        }
+
+        fn binary_to_decimal(binary: &str) -> Result<u8, &'static str> {
+            if binary.len() != 8 {
+                return Err("binary must contain exactly 8 bits");
+            }
+
+            let mut decimal = 0;
+
+            for bit in binary.chars() {
+                decimal *= 2;
+
+                match bit {
+                    '0' => {}
+                    '1' => decimal += 1,
+                    _ => return Err("binary can only contain 0 or 1"),
+                }
+            }
+
+            Ok(decimal)
         }        
     }
 }
@@ -116,4 +136,34 @@ mod tests {
             assert_eq!(Ipv4::decimal_to_binary(42), "00101010");
         }        
     }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
